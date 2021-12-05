@@ -3,6 +3,7 @@
     Properties
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _BumpMap ("Normal Map", 2D) = "bump" {}
     }
     SubShader
     {
@@ -14,10 +15,12 @@
         #pragma target 3.0
 
         sampler2D _MainTex;
+        sampler2D _BumpMap;
 
         struct Input
         {
             float2 uv_MainTex;
+            float2 uv_BumpMap;
         };
 
 
@@ -28,6 +31,7 @@
         {
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex * 10);
             o.Emission = c.rgb;
+            o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap * 10 ));
             o.Alpha = c.a;
         }
         ENDCG

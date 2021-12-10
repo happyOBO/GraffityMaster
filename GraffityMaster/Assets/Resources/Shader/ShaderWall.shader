@@ -7,7 +7,6 @@
         _MainTex("Base (RGB) Gloss (A)", 2D) = "white" {}
         _BumpMap("Normalmap", 2D) = "bump" {}
         _ParallaxMap("Heightmap (A)", 2D) = "black" {}
-        _MainTex2("Base (RGB) Gloss (A)", 2D) = "white" {}
     }
         SubShader{
             Tags { "RenderType" = "Opaque" }
@@ -39,8 +38,7 @@
             IN.uv_BumpMap += offset;
 
             fixed4 tex = tex2D(_MainTex, IN.uv_MainTex * 5);
-            fixed4 tex2 = tex2D(_MainTex2, IN.uv_MainTex2);
-            o.Albedo = lerp(tex.rgb,tex2.rgb, 1.0);
+            o.Albedo = tex.rgb;
             o.Gloss = tex.a;
             o.Alpha = tex.a;
             o.Specular = _Shininess;

@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 727603909}
   - component: {fileID: 727603908}
   - component: {fileID: 727603907}
+  - component: {fileID: 727603911}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -237,7 +238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3abf473d50106f44c9611c2c76fd9a91, type: 2}
+  - {fileID: 2100000, guid: 35555ed5b4ed0d14183ab4c7b58f7103, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -280,6 +281,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &727603911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727603906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa17a5b175b6f244ab9f1653d287112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1050065607
 GameObject:
   m_ObjectHideFlags: 0

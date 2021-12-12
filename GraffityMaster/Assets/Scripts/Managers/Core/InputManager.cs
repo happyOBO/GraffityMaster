@@ -7,17 +7,43 @@ using UnityEngine.EventSystems;
 public class InputManager
 {
     public Action KeyAction = null;
-    public Action MouseAction = null;
+    public Action<Define.MouseEvent> MouseAction = null;
+
+    bool _pressed = false;
+    float _pressedTime = 0.0f;
 
     public void OnUpdate()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
         if (Input.anyKey && KeyAction != null)
             KeyAction.Invoke(); // 누군가 구독중이면 구독중인것을 실행시켜라
 
+
         if (MouseAction != null)
-            MouseAction.Invoke();
+        {
+            if (Input.GetMouseButton(0))
+            {
+                if (!_pressed)
+                {
+                    MouseAction.Invoke(Define.MouseEvent.PointerDown);
+                    _pressedTime = Time.time;
+                }
+                MouseAction.Invoke(Define.MouseEvent.Press);
+                _pressed = true;
+            }
+            else
+            {
+                if (_pressed)
+                {
+                    if (Time.time < _pressedTime + 0.2f)
+                        MouseAction.Invoke(Define.MouseEvent.Click);
+                    MouseAction.Invoke(Define.MouseEvent.PointerUp);
+
+                }
+                _pressed = false;
+                _pressedTime = 0.0f;
+            }
+            MouseAction.Invoke(Define.MouseEvent.None);
+        }
     }
 
     public void Clear()

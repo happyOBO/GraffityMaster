@@ -6,7 +6,6 @@ public class FirstPersonController : MonoBehaviour
 {
     public float mouseSpeed = 3.0f; // 마우스 회전 속도
     public float moveSpeed = 10.0f; // 이동 속도
-    private float xRotate = 0.0f; // 내부 사용할 X축 회전량은 별도 정의 ( 카메라 위 아래 방향 )
     Camera mainCamera;
 
     private void Start()
@@ -26,7 +25,7 @@ public class FirstPersonController : MonoBehaviour
     {
     }
 
-    void MouseRoatate()
+    void MouseRoatate(Define.MouseEvent evt)
     {
         float yRotateSize = Input.GetAxis("Mouse X") * mouseSpeed;
         float xRotateSize = -Input.GetAxis("Mouse Y") * mouseSpeed;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Define
 {
+    public enum SprayState
+    {
+        Idle,
+        Spray,
+    }
     public enum WorldObject
     {
         Unknown,
@@ -45,6 +50,7 @@ public enum Layer
     }
     public enum MouseEvent
     {
+        None,
         Press,
         PointerDown,
         PointerUp, 

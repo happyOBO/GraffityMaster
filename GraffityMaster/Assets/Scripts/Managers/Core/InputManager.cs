@@ -14,6 +14,8 @@ public class InputManager
 
     public void OnUpdate()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         if (Input.anyKey && KeyAction != null)
             KeyAction.Invoke(); // 누군가 구독중이면 구독중인것을 실행시켜라
 

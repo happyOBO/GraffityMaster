@@ -8,11 +8,13 @@ using UnityEngine;
 public class GameMananger
 {
     GameObject _player;
+    GameObject _wall;
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
 
     public Action<int> OnSpawnEvent;
 
     public GameObject GetPlayer() { return _player; }
+    public GameObject GetWall() { return _wall; }
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);
@@ -26,6 +28,9 @@ public class GameMananger
                 break;
             case Define.WorldObject.Player:
                 _player = go;
+                break;
+            case Define.WorldObject.Wall:
+                _wall = go;
                 break;
         }
 

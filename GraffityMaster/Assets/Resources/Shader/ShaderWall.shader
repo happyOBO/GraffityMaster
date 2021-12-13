@@ -8,7 +8,7 @@
         _BumpMap("Normalmap", 2D) = "bump" {}
         _MaskTex("Mask Texture", 2D) = "black" {}
         _DrawTex("Draw Texture", 2D) = "white" {}
-
+        _ColorTex("Color Texture", 2D) = "black" {}
     }
         SubShader{
             Tags { "RenderType" = "Opaque" }
@@ -23,6 +23,7 @@
         sampler2D _ParallaxMap;
         sampler2D _MaskTex;
         sampler2D _DrawTex;
+        sampler2D _ColorTex;
         half _Shininess;
         float _Parallax;
 
@@ -31,6 +32,7 @@
             float2 uv_MainTex;
             float2 uv_MaskTex;
             float2 uv_DrawTex;
+            float2 uv_ColorTex;
             float2 uv_BumpMap;
             float3 viewDir;
         };
@@ -44,8 +46,12 @@
             fixed4 mainTex = tex2D(_MainTex, IN.uv_MainTex * 5);
             fixed4 maskTex = tex2D(_MaskTex, IN.uv_MaskTex);
             fixed4 drawTex = tex2D(_DrawTex, IN.uv_DrawTex);
+            fixed4 colorTex = tex2D(_ColorTex, IN.uv_ColorTex);
             
-            o.Albedo = lerp(mainTex.rgb, drawTex.rgb, maskTex.r);
+            o.Albedo = lerp(mainTex.rgb, colorTex.rgb, colorTex.r);
+            o.Albedo = lerp(o.Albedo, colorTex.rgb, colorTex.g);
+            o.Albedo = lerp(o.Albedo, colorTex.rgb, colorTex.b);
+            o.Albedo = lerp(o.Albedo, drawTex.rgb, maskTex.a);
             o.Gloss = mainTex.a;
             o.Alpha = mainTex.a;
             o.Specular = _Shininess;

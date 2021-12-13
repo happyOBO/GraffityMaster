@@ -9,17 +9,15 @@ public class GameScene : BaseScene
     {
         base.Init();
         sceneType = Define.Scene.Game;
-        Managers.UI.ShowSceneUI<UI_Inven>("UI_Inven");
+        Managers.UI.ShowSceneUI<UI_Palette>("UI_Palette");
 
         Dictionary<int,Data.Stat> dict = Managers.Data.StatDict;
         gameObject.GetOrAddComponent<CursorController>();
 
-        //GameObject player = Managers.Game.Spawn(Define.WorldObject.Player,"UnityChan");
-        //Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
-        //Managers.Game.Spawn(Define.WorldObject.Monster, "Zombie");
-        GameObject go = new GameObject { name = "SpawningPool" };
-        SpawningPool pool = go.GetOrAddComponent<SpawningPool>();
-        // pool.SetKeepMonsterCount(5);
+        GameObject wall = Managers.Game.Spawn(Define.WorldObject.Wall, "Wall");
+        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player");
+        player.GetComponent<SprayController>()._wall = wall;
+
     }
 
     public override void Clear()

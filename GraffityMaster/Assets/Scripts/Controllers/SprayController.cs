@@ -6,10 +6,12 @@ using UnityEngine;
 public class SprayController : MonoBehaviour
 {
     [SerializeField]
-    GameObject _wall;
+    public GameObject _wall;
     WallController wallController;
 
     public Define.SprayState State;
+    [SerializeField]
+    public Define.PaletteColor sprayColor = Define.PaletteColor.Green;
     void Start()
     {
         Init();
@@ -58,7 +60,7 @@ public class SprayController : MonoBehaviour
         Vector3 hitWallPoint = FindHitPoint();
         if(hitWallPoint.magnitude > 0)
         {
-            wallController.SprayPointAround(hitWallPoint);
+            wallController.SprayPointAround(hitWallPoint, sprayColor);
         }
     }
 
@@ -71,7 +73,7 @@ public class SprayController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + Vector3.up, look, out hit, 30, mask))
         {
-            Debug.Log($"Raycast !! {hit.point}");
+            //Debug.Log($"Raycast !! {hit.point}");
             return hit.point;
         }
 

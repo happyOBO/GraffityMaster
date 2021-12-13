@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Inven : UI_Scene
+public class UI_Palette : UI_Scene
 {
     enum GameObjects
     {
@@ -18,22 +19,23 @@ public class UI_Inven : UI_Scene
 
         // 기존에 붙여 놓았던 UI_Inven_Item 삭제
 
-        foreach(Transform child in gridPanel.transform)
+        foreach (Transform child in gridPanel.transform)
         {
             Managers.Resource.Destroy(child.gameObject);
         }
         
-        for(int i = 0; i < 8; i++)
+        Array paletteColors = Enum.GetValues(typeof(Define.PaletteColor));
+        foreach(Define.PaletteColor color in paletteColors)
         {
-            GameObject item = Managers.UI.MakeSubItem<UI_Inven_Item>(parent: gridPanel.transform).gameObject;
-            UI_Inven_Item invenItem = item.GetOrAddComponent<UI_Inven_Item>();
-            invenItem.SetInfo($"item-{i}");
+            GameObject item = Managers.UI.MakeSubItem<UI_Palette_Item>(parent: gridPanel.transform).gameObject;
+            UI_Palette_Item invenItem = item.GetOrAddComponent<UI_Palette_Item>();
+            invenItem.SetInfo($"{color.ToString()}", color);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

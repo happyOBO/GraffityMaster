@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Define
 {
+    public enum PaletteColor
+    {
+        Red,
+        Green,
+        Blue,
+        Texture,
+    }
+
     public enum SprayState
     {
         Idle,
@@ -14,6 +22,7 @@ public class Define
         Unknown,
         Player,
         Monster,
+        Wall,
     }
     public enum State
 	{

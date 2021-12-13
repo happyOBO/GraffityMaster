@@ -27,20 +27,27 @@ public class FirstPersonController : MonoBehaviour
 
     void MouseRoatate(Define.MouseEvent evt)
     {
-        float yRotateSize = Input.GetAxis("Mouse X") * mouseSpeed;
-        float xRotateSize = -Input.GetAxis("Mouse Y") * mouseSpeed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            float yRotateSize = Input.GetAxis("Mouse X") * mouseSpeed;
+            float xRotateSize = -Input.GetAxis("Mouse Y") * mouseSpeed;
 
-        transform.localRotation *= Quaternion.Euler(0.0f, yRotateSize, 0.0f);
-        mainCamera.transform.localRotation *= Quaternion.Euler(xRotateSize, 0.0f, 0.0f);
+            transform.localRotation *= Quaternion.Euler(0.0f, yRotateSize, 0.0f);
+            mainCamera.transform.localRotation *= Quaternion.Euler(xRotateSize, 0.0f, 0.0f);
+        }
     }
 
     void KeyboardMove()
     {
-        Vector3 dir = new Vector3(
-            Input.GetAxis("Horizontal"),
-            0,
-            Input.GetAxis("Vertical")
-        );
-        transform.Translate(dir * moveSpeed * Time.deltaTime);
+        if(Input.GetKey(KeyCode.LeftShift) )
+        {
+            Vector3 dir = new Vector3(
+                Input.GetAxis("Horizontal"),
+                0,
+                Input.GetAxis("Vertical")
+            );
+            transform.Translate(dir * moveSpeed * Time.deltaTime);
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 ## GraffityMaster
 
+<img src="./README_Assets/assets01.png" width="600">
 
 ### 21-11-28
 

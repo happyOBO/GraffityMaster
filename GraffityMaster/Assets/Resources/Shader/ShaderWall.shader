@@ -1,7 +1,7 @@
 ﻿Shader "Custom/ShaderWall" {
     Properties{
 
-        _SpecColor("Specular Color", Color) = (0.5, 0.5, 0.5, 1)
+
         [PowerSlider(5.0)] _Shininess("Shininess", Range(0.01, 1)) = 0.078125
         _Parallax("Height", Range(0.005, 0.08)) = 0.02
         _MainTex("Base (RGB) Gloss (A)", 2D) = "white" {}
@@ -15,7 +15,7 @@
             LOD 600
 
         CGPROGRAM
-        #pragma surface surf BlinnPhong
+        #pragma surface surf Standard 
         #pragma target 3.0
 
         sampler2D _MainTex;
@@ -37,7 +37,7 @@
             float3 viewDir;
         };
 
-        void surf(Input IN, inout SurfaceOutput o) {
+        void surf(Input IN, inout SurfaceOutputStandard o) {
             half h = tex2D(_ParallaxMap, IN.uv_BumpMap * 5).w;
             float2 offset = ParallaxOffset(h, _Parallax, IN.viewDir);
             IN.uv_MainTex += offset;
@@ -52,9 +52,8 @@
             o.Albedo = lerp(o.Albedo, colorTex.rgb, colorTex.g);
             o.Albedo = lerp(o.Albedo, colorTex.rgb, colorTex.b);
             o.Albedo = lerp(o.Albedo, drawTex.rgb, maskTex.a);
-            o.Gloss = mainTex.a;
             o.Alpha = mainTex.a;
-            o.Specular = _Shininess;
+            o.Smoothness = maskTex.r + maskTex.g + maskTex.b + maskTex.a;
             o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap * 5));
         }
         ENDCG

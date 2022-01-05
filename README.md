@@ -33,3 +33,12 @@
 - 플레이시 변경될 텍스쳐는 Dictionary로 관리
 - 색 추가
 - CG 쉐이더에서 `lerp`를 이용해서 해당 스프레이 지점으로 마스크 효과
+
+
+### 22-01-05
+
+- 라이팅 함수 `blinphong` 에서 `Standard` 로 변경
+- `Smoothness` 를 이용해서, 스프레이 뿌린 부분이 촉촉해보이도록
+- 스프레이 지우는 기능 및 UI 추가
+
+<img src="./README_Assets/assets03.png" width="600">

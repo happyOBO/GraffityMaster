@@ -10,6 +10,7 @@ public class Define
         Green,
         Blue,
         Texture,
+        Eraser,
     }
 
     public enum SprayState

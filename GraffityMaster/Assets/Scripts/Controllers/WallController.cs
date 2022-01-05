@@ -78,6 +78,13 @@ public class WallController : MonoBehaviour
                               _textures["_MaskTex"], "_MaskTex");
                     break;
                 }
+            case Define.PaletteColor.Eraser:
+                {
+                    SetPixels(new Color(0.0f, 0.0f, 0.0f, 0.0f),
+                              PointToPixelPosition(point),
+                              _textures["_ColorTex"], "_ColorTex");
+                    break;
+                }
         }
 
     }
